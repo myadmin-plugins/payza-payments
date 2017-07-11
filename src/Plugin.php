@@ -17,7 +17,7 @@ class Plugin {
 
 	public static function getHooks() {
 		return [
-			//'system.settings' => [__CLASS__, 'getSettings'],
+			'system.settings' => [__CLASS__, 'getSettings'],
 			//'ui.menu' => [__CLASS__, 'getMenu'],
 		];
 	}
@@ -41,8 +41,8 @@ class Plugin {
 
 	public static function getSettings(GenericEvent $event) {
 		$settings = $event->getSubject();
-		$settings->add_text_setting('General', 'Payza', 'abuse_imap_user', 'Payza IMAP User:', 'Payza IMAP Username', ABUSE_IMAP_USER);
-		$settings->add_text_setting('General', 'Payza', 'abuse_imap_pass', 'Payza IMAP Pass:', 'Payza IMAP Password', ABUSE_IMAP_PASS);
+		$settings->add_radio_setting('Billing', 'Payza', 'payza_enable', 'Enable Payza', 'Enable Payza', PAYZA_ENABLE, [true, false], ['Enabled', 'Disabled']);
+		$settings->add_text_setting('Billing', 'Payza', 'payza_email', 'Email ', 'Email ', (defined('PAYZA_EMAIL') ? PAYZA_EMAIL : ''));
 	}
 
 }
