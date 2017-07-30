@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class Plugin {
 
 	public static $name = 'Payza Plugin';
-	public static $description = 'Allows handling of Payza emails and honeypots';
+	public static $description = 'Allows handling of Payza based Payments through their Payment Processor/Payment System.';
 	public static $help = '';
 	public static $type = 'plugin';
 
