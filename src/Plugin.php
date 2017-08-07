@@ -29,6 +29,7 @@ class Plugin {
 		return [
 			'system.settings' => [__CLASS__, 'getSettings'],
 			//'ui.menu' => [__CLASS__, 'getMenu'],
+			'function.requirements' => [__CLASS__, 'getRequirements'],
 		];
 	}
 
@@ -49,10 +50,7 @@ class Plugin {
 	 */
 	public static function getRequirements(GenericEvent $event) {
 		$loader = $event->getSubject();
-		$loader->add_requirement('class.Payza', '/../vendor/detain/myadmin-payza-payments/src/Payza.php');
-		$loader->add_requirement('deactivate_kcare', '/../vendor/detain/myadmin-payza-payments/src/abuse.inc.php');
-		$loader->add_requirement('deactivate_abuse', '/../vendor/detain/myadmin-payza-payments/src/abuse.inc.php');
-		$loader->add_requirement('get_abuse_licenses', '/../vendor/detain/myadmin-payza-payments/src/abuse.inc.php');
+		$loader->add_requirement('pay_balance_payza', '/../vendor/detain/myadmin-payza-payments/src/pay_balance_payza.php');
 	}
 
 	/**
