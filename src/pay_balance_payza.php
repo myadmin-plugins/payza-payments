@@ -13,7 +13,7 @@
 		if (isset($GLOBALS['tf']->variables->request['module']))
 			$module = $GLOBALS['tf']->variables->request['module'];
 		$module = get_module_name($module);
-		$settings = get_module_settings($module);
+		$settings = \get_module_settings($module);
 		$custid = get_custid($custid, $module);
 		$table->add_hidden('module', $module);
 		$db = get_module_db($module);
