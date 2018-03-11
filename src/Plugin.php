@@ -58,7 +58,7 @@ class Plugin {
 	 */
 	public static function getSettings(GenericEvent $event) {
 		$settings = $event->getSubject();
-		$settings->add_radio_setting('Billing', 'Payza', 'payza_enable', 'Enable Payza', 'Enable Payza', PAYZA_ENABLE, [true, false], ['Enabled', 'Disabled']);
+		$settings->add_radio_setting('Billing', 'Payza', 'payza_enable', 'Enable Payza', 'Enable Payza', PAYZA_ENABLE, [TRUE, FALSE], ['Enabled', 'Disabled']);
 		$settings->add_text_setting('Billing', 'Payza', 'payza_email', 'Email ', 'Email ', (defined('PAYZA_EMAIL') ? PAYZA_EMAIL : ''));
 	}
 
