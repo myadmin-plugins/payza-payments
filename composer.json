@@ -1,5 +1,5 @@
 {
-	"name": "detain/myadmin-payza-payments",
+	"name": "detain/payza-payments",
 	"type": "myadmin-plugin",
 	"description": "Payza handling plugin for MyAdmin",
 	"keywords": [
