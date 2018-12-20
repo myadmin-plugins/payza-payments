@@ -17,8 +17,6 @@
 		$custid = get_custid($custid, $module);
 		$table->add_hidden('module', $module);
 		$db = get_module_db($module);
-		$GLOBALS['tf']->accounts->set_db_module($module);
-		$GLOBALS['tf']->history->set_db_module($module);
 		$data = $GLOBALS['tf']->accounts->read($custid);
 		$table->set_title('Make '.$settings['TBLNAME'].' Payza Payment');
 		$table->add_hidden('custid', $custid);
