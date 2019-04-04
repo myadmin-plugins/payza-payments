@@ -43,8 +43,8 @@ class Plugin
 		$menu = $event->getSubject();
 		if ($GLOBALS['tf']->ima == 'admin') {
 			function_requirements('has_acl');
-            if (has_acl('client_billing')) {
-            }
+			if (has_acl('client_billing')) {
+			}
 		}
 	}
 
@@ -53,22 +53,22 @@ class Plugin
 	 */
 	public static function getRequirements(GenericEvent $event)
 	{
-        /**
-         * @var \MyAdmin\Plugins\Loader $this->loader
-         */
-        $loader = $event->getSubject();
+		/**
+		 * @var \MyAdmin\Plugins\Loader $this->loader
+		 */
+		$loader = $event->getSubject();
 		$loader->add_page_requirement('pay_balance_payza', '/../vendor/detain/myadmin-payza-payments/src/pay_balance_payza.php');
 	}
 
 	/**
 	 * @param \Symfony\Component\EventDispatcher\GenericEvent $event
 	 */
-    public static function getSettings(GenericEvent $event)
-    {
-        /**
-         * @var \MyAdmin\Settings $settings
-         **/
-        $settings = $event->getSubject();
+	public static function getSettings(GenericEvent $event)
+	{
+		/**
+		 * @var \MyAdmin\Settings $settings
+		 **/
+		$settings = $event->getSubject();
 		$settings->add_radio_setting(_('Billing'), _('Payza'), 'payza_enable', _('Enable Payza'), _('Enable Payza'), PAYZA_ENABLE, [true, false], ['Enabled', 'Disabled']);
 		$settings->add_text_setting(_('Billing'), _('Payza'), 'payza_email', _('Email'), _('Email'), (defined('PAYZA_EMAIL') ? PAYZA_EMAIL : ''));
 	}
