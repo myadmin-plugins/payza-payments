@@ -28,9 +28,12 @@
         $table->add_row();
         $invoices = [];
         if (isset($GLOBALS['tf']->variables->request['invoices'])) {
-            $GLOBALS['tf']->variables->request['invoices'] = $db->real_escape(str_replace('INV'.$module, '', $GLOBALS['tf']->variables->request['invoices']));
+            $raw_invoices = str_replace('INV'.$module, '', $GLOBALS['tf']->variables->request['invoices']);
+            $invoice_ids = array_map('intval', explode(',', $raw_invoices));
+            $invoice_ids = array_filter($invoice_ids, function($v) { return $v > 0; });
+            $GLOBALS['tf']->variables->request['invoices'] = implode(',', $invoice_ids);
             $table->add_hidden('invoices', $GLOBALS['tf']->variables->request['invoices']);
-            $query = "select * from invoices where invoices_module='{$module}' and invoices_paid=0 and invoices_type=1 and invoices_custid='{$custid}' and invoices_id in ('".implode("','", explode(',', $GLOBALS['tf']->variables->request['invoices']))."') order by invoices_id desc";
+            $query = "select * from invoices where invoices_module='{$module}' and invoices_paid=0 and invoices_type=1 and invoices_custid='{$custid}' and invoices_id in ('".implode("','", $invoice_ids)."') order by invoices_id desc";
             myadmin_log('billing', 'info', $query, __LINE__, __FILE__, $module);
             $db->query($query, __LINE__, __FILE__);
         } else {
