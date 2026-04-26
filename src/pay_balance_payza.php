@@ -5,34 +5,34 @@
         myadmin_log('billing', 'info', 'Pay with Payza Called', __LINE__, __FILE__);
         page_title('Pay Balance With Payza');
         $table = new TFTable();
-        if ($GLOBALS['tf']->ima == 'admin') {
-            $custid = $GLOBALS['tf']->db->real_escape($GLOBALS['tf']->variables->request['custid']);
+        if (\MyAdmin\App::ima() == 'admin') {
+            $custid = \MyAdmin\App::db()->real_escape(\MyAdmin\App::variables()->request['custid']);
         } else {
-            $custid = $GLOBALS['tf']->session->account_id;
+            $custid = \MyAdmin\App::session()->account_id;
         }
         $table = new TFTable();
         $module = 'default';
-        if (isset($GLOBALS['tf']->variables->request['module'])) {
-            $module = $GLOBALS['tf']->variables->request['module'];
+        if (isset(\MyAdmin\App::variables()->request['module'])) {
+            $module = \MyAdmin\App::variables()->request['module'];
         }
         $module = get_module_name($module);
         $settings = \get_module_settings($module);
         $custid = get_custid($custid, $module);
         $table->add_hidden('module', $module);
         $db = get_module_db($module);
-        $data = $GLOBALS['tf']->accounts->read($custid);
+        $data = \MyAdmin\App::accounts()->read($custid);
         $table->set_title('Make '.$settings['TBLNAME'].' Payza Payment');
         $table->add_hidden('custid', $custid);
         $table->add_field('Invoice Description');
         $table->add_field('Invoice Amount');
         $table->add_row();
         $invoices = [];
-        if (isset($GLOBALS['tf']->variables->request['invoices'])) {
-            $raw_invoices = str_replace('INV'.$module, '', $GLOBALS['tf']->variables->request['invoices']);
+        if (isset(\MyAdmin\App::variables()->request['invoices'])) {
+            $raw_invoices = str_replace('INV'.$module, '', \MyAdmin\App::variables()->request['invoices']);
             $invoice_ids = array_map('intval', explode(',', $raw_invoices));
             $invoice_ids = array_filter($invoice_ids, function($v) { return $v > 0; });
-            $GLOBALS['tf']->variables->request['invoices'] = implode(',', $invoice_ids);
-            $table->add_hidden('invoices', $GLOBALS['tf']->variables->request['invoices']);
+            \MyAdmin\App::variables()->request['invoices'] = implode(',', $invoice_ids);
+            $table->add_hidden('invoices', \MyAdmin\App::variables()->request['invoices']);
             $query = "select * from invoices where invoices_module='{$module}' and invoices_paid=0 and invoices_type=1 and invoices_custid='{$custid}' and invoices_id in ('".implode("','", $invoice_ids)."') order by invoices_id desc";
             myadmin_log('billing', 'info', $query, __LINE__, __FILE__, $module);
             $db->query($query, __LINE__, __FILE__);
@@ -48,7 +48,7 @@
 <input type="hidden" name="ap_currency" value="USD"/>';
         $gidx = 0;
         $iids = [];
-        $returnURL = 'https://'.DOMAIN.URLDIR.$GLOBALS['tf']->link('/index.php', 'choice=none.view_balance');
+        $returnURL = 'https://'.DOMAIN.URLDIR.\MyAdmin\App::link('/index.php', 'choice=none.view_balance');
         $amount = 0;
         while ($db->next_record(MYSQL_ASSOC)) {
             $amount = bcadd($amount, $db->Record['invoices_amount'], 2);
