@@ -1,6 +1,6 @@
 ---
 name: write-plugin-test
-description: Creates PHPUnit 9.6 tests in `tests/PluginTest.php` under `Detain\MyAdminPayza\Tests\`. Use when user says 'add test', 'write unit test', 'test plugin method', 'test getHooks', 'test getSettings', or 'test getRequirements'. Covers bootstrap stub patterns, ReflectionClass-based structural checks, anonymous-class event subjects, and source-file assertion patterns. Do NOT use for integration tests requiring a live DB or full MyAdmin bootstrap. NOTE: for a plugin's contract/behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
+description: Creates PHPUnit 9.6 tests in `tests/PluginTest.php` under `Detain\MyAdminPayza\Tests\`. Use when user says 'add test', 'write unit test', 'test plugin method', 'test getHooks', 'test getSettings', or 'test getRequirements'. Covers bootstrap stub patterns, ReflectionClass-based structural checks, anonymous-class event subjects, and source-file assertion patterns. Do NOT use for integration tests requiring a live DB or full MyAdmin bootstrap. For a plugin's contract or behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
 ---
 <!-- myadmin-contract-harness-notice -->
 > ### ⚠️ Read this before the rest of the file
